@@ -3,10 +3,10 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import http from "http";
+import { Server } from "socket.io";
 import connectDb from "./Config/connectDb.js";
 import userRoute from "./routes/userRoute.js";
 import messageRoute from "./routes/messageRoute.js";
-import { initSocket } from "./socket/socket.js";
 
 // Create an Express app
 const app = express();
@@ -29,13 +29,32 @@ app.use(cookieParser());
 app.use("/api/auth", userRoute);
 app.use("/api/message", messageRoute);
 
-
-
+// Impliment Socket.io
 
 // Create the HTTP server using the Express app
 const server = http.createServer(app);
 
-const io = initSocket(server);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000", // Frontend origin
+    methods: ["GET", "POST"], // Allowed methods
+    credentials: true, // To support cookies or headers with credentials
+  },
+});
+
+const onlineUsers = {}; // Define onlineUsers object
+
+io.on("connection", (socket) => {
+  const userId = socket.handshake.query.userId;
+  onlineUsers[userId] = socket.id; // Store userId and socket.id in onlineUsers object
+
+  io.emit("getOnlineUser", Object.keys(onlineUsers));
+  console.log(onlineUsers);
+
+  socket.on("disconnect", () => {
+    delete onlineUsers[userId]; // Correct way to remove the user from onlineUsers object
+  });
+});
 
 // Start the server
 const PORT = process.env.PORT || 5000;
@@ -43,5 +62,4 @@ server.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-
-export default io
+export { io }; // Correct the export

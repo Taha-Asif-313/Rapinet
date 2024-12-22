@@ -24,7 +24,7 @@ const App = () => {
 
   useEffect(() => {
     if (isLogin && authUser) {
-      const newSocket = io("http://localhost:5000", {
+      const newSocket = io(`${import.meta.env.VITE_API_URL}`, {
         query: { userId: authUser.userId },
       });
       setSocket(newSocket);
@@ -43,7 +43,7 @@ const App = () => {
       });
 
       newSocket.on("sendMessage", (message) => {
-        dispatch(setuserMessages([...userMessages, message]));
+        dispatch(setuserMessages((prevMessages) => [...prevMessages, message]));
         console.log(message);
       });
       return () => {
