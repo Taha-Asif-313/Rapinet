@@ -17,7 +17,7 @@ connectDb();
 // Middleware setup
 app.use(
   cors({
-    origin: "http://localhost:3000", // Frontend URL
+    origin: process.env.CLIENT_URL || "http://localhost:3000", // Frontend URL
     credentials: true, // Required if you're working with cookies or sessions
   })
 );
@@ -29,14 +29,22 @@ app.use(cookieParser());
 app.use("/api/auth", userRoute);
 app.use("/api/message", messageRoute);
 
-// Impliment Socket.io
+// Serve static files from the React app
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+
+// Implement Socket.io
 
 // Create the HTTP server using the Express app
 const server = http.createServer(app);
 
-const io = new Server(server, {
+ export const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", // Frontend origin
+    origin: process.env.CLIENT_URL || "http://localhost:3000", // Frontend origin
     methods: ["GET", "POST"], // Allowed methods
     credentials: true, // To support cookies or headers with credentials
   },
@@ -62,4 +70,6 @@ server.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-export { io }; // Correct the export
+export const getReceiverSocketId = (receiverId) => {
+  return onlineUsers[receiverId];
+};
