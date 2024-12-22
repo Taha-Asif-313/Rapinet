@@ -68,17 +68,13 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     // Get data
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
 
-    let user;
+ 
 
-    // Find User by email or username
-    if (username) {
-      user = await User.findOne({ username: username });
-    }
-    if (email) {
-      user = await User.findOne({ email: email });
-    }
+
+     const user = await User.findOne({ email: email });
+
 
     // Email or username matching
     if (!user) {
@@ -114,6 +110,7 @@ const login = async (req, res) => {
     return res.status(400).json({
       success: false,
       message: "internal server error !",
+      error: error,
     });
   }
 };
