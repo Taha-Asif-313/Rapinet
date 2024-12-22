@@ -22,7 +22,7 @@ const Login = () => {
     setinputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
-  const { response, loading, fetchData } = useAuth(
+  const { response, loading, error,fetchData } = useAuth(
     `${import.meta.env.VITE_API_URL}/api/auth/login`,
     inputs
   );
@@ -37,6 +37,11 @@ const Login = () => {
   if (loading) {
     return <Loading />;
   }
+  if(error){
+    console.log(error);
+    toast.error("An error occured"); 
+  }
+    
 
   return (
     <>
