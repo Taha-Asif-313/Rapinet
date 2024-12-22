@@ -7,6 +7,7 @@ import { Server } from "socket.io";
 import connectDb from "./Config/connectDb.js";
 import userRoute from "./routes/userRoute.js";
 import messageRoute from "./routes/messageRoute.js";
+import path from "path";
 
 // Create an Express app
 const app = express();
@@ -42,7 +43,7 @@ if (process.env.NODE_ENV === "production") {
 // Create the HTTP server using the Express app
 const server = http.createServer(app);
 
- export const io = new Server(server, {
+export const io = new Server(server, {
   cors: {
     origin: process.env.CLIENT_URL || "http://localhost:3000", // Frontend origin
     methods: ["GET", "POST"], // Allowed methods
@@ -73,3 +74,5 @@ server.listen(PORT, () => {
 export const getReceiverSocketId = (receiverId) => {
   return onlineUsers[receiverId];
 };
+
+export default app; // Export the app for Vercel deployment
