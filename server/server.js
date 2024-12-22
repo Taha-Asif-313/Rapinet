@@ -7,7 +7,6 @@ import { Server } from "socket.io";
 import connectDb from "./Config/connectDb.js";
 import userRoute from "./routes/userRoute.js";
 import messageRoute from "./routes/messageRoute.js";
-import path from "path";
 
 // Create an Express app
 const app = express();
@@ -18,7 +17,7 @@ connectDb();
 // Middleware setup
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000", // Frontend URL
+    origin: "http://localhost:3000", // Frontend URL
     credentials: true, // Required if you're working with cookies or sessions
   })
 );
@@ -31,12 +30,6 @@ app.use("/api/auth", userRoute);
 app.use("/api/message", messageRoute);
 
 // Serve static files from the React app
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
 
 // Implement Socket.io
 
@@ -45,7 +38,7 @@ const server = http.createServer(app);
 
 export const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:3000", // Frontend origin
+    origin: "http://localhost:3000", // Frontend origin
     methods: ["GET", "POST"], // Allowed methods
     credentials: true, // To support cookies or headers with credentials
   },
