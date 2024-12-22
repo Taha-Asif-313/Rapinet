@@ -8,7 +8,7 @@ const useGetConversation = () => {
   const GetUserMessages = async (Id) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/message/get-conversation/${Id}`,
+        `${import.meta.env.VITE_API_URL}/api/message/get-conversation/${Id}`,
         { withCredentials: true }
       );
 
