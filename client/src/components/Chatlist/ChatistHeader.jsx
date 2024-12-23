@@ -38,7 +38,7 @@ const ChatistHeader = ({ toggleTheme, isDarkTheme, authUser }) => {
           </button>
           <div className="flex md:hidden items-center">
             <Link
-              to={"/chat-page/profile"}
+              to={"/profile"}
               className=" flex gap-2 items-center ml-1"
             >
               {authUser && (
