@@ -3,9 +3,11 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import LogoutBox from "./DialogBoxes/LogoutBox";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showLogout, setshowLogout] = useState(false)
   const isLogin = useSelector((state) => state.user.isLogin);
 
   const logoutItems = [
@@ -19,6 +21,7 @@ const Navbar = () => {
 
   return (
     <>
+    <LogoutBox Show={showLogout} setShow={setshowLogout} />
       <nav
         className={`${
           isLogin ? "hidden" : "flex"
