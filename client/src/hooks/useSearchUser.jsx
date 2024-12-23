@@ -18,7 +18,6 @@ const useSearchUser = (url, searchTerm) => {
       // Handle success or failure based on the response
       if (res.data.success) {
         setResponse(res.data.users);
-        toast.success(res.data.message);
       } else {
         setError(res.data.message);
         toast.error(res.data.message);

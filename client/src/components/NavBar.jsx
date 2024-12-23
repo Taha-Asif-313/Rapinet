@@ -10,13 +10,10 @@ const Navbar = () => {
 
   const logoutItems = [
     { name: "Home", url: "/" },
-    { name: "Blogs", url: "/blogs" },
     { name: "About", url: "/about" },
   ];
   const loginItems = [
     { name: "Home", url: "/" },
-    { name: "CreateBlog", url: "/createblog" },
-    { name: "Blogs", url: "/blogs" },
     { name: "About", url: "/about" },
   ];
 
@@ -29,7 +26,7 @@ const Navbar = () => {
       >
         <div className="nav-start-section lg:w-[30%] w-[45%]">
           <div className="logo cursor-pointer">
-            <Link className={`flex items-center gap-1 font-bold`}>
+            <Link to={'/'} className={`flex items-center gap-1 font-bold`}>
               <img className="w-10" src="/logo.svg" alt="Logo" />
               <h1 className="text-lg font-semibold">RapiNet</h1>
             </Link>
@@ -51,13 +48,13 @@ const Navbar = () => {
                 })
               : logoutItems.map((item, index) => {
                   return (
-                    <a
+                    <Link
                       key={index} // Add unique key prop
-                      href={item.url}
+                      to={item.url}
                       className="list-item text-sm px-3 transition-all hover:border-b hover:text-primary border-primary cursor-pointer"
                     >
                       <li>{item.name}</li>
-                    </a>
+                    </Link>
                   );
                 })}
           </ul>
@@ -75,23 +72,23 @@ const Navbar = () => {
                   />
                 </div>
 
-                <a
+                <Link
                   onClick={() =>
                     document.getElementById("my_modal_1").showModal()
                   }
                   className="singup-btn rounded-full py-1 px-5 transition-all bg-transparent border-2 border-primary cursor-pointer hover:bg-primary hover:text-black"
                 >
                   Logout
-                </a>
+                </Link>
               </>
             ) : (
               <>
-                <a
-                  href={"/signup"}
+                <Link
+                  to={"/signup"}
                   className="singup-btn text-sm rounded py-1 px-5 font-medium transition-all duration-300 cursor-pointer border border-primary bg-primary hover:bg-transparent hover:font-normal hover:text-primary"
                 >
                   Let's Chat
-                </a>
+                </Link>
               </>
             )}
           </div>
@@ -132,37 +129,37 @@ const Navbar = () => {
                   })
                 : logoutItems.map((item, index) => {
                     return (
-                      <a
+                      <Link
                         key={index} // Add unique key prop
-                        href={item.url}
+                        to={item.url}
                         className="list-items text-center list-none py-1 px-5 bg-zinc-900 rounded-lg transition-all hover:bg-primary cursor-pointer"
                       >
                         <li>{item.name}</li>
-                      </a>
+                      </Link>
                     );
                   })}
             </div>
             <div className="btns flex flex-col justify-center gap-2">
               {isLogin ? (
                 <>
-                  <a className="singup-btn text-center rounded-full py-1 px-5 transition-all bg-transparent border-2 border-primary cursor-pointer hover:bg-primary hover:text-black">
+                  <Link className="singup-btn text-center rounded-full py-1 px-5 transition-all bg-transparent border-2 border-primary cursor-pointer hover:bg-primary hover:text-black">
                     Logout
-                  </a>
+                  </Link>
                 </>
               ) : (
                 <>
-                  <a
-                    href={"/signup"}
+                  <Link
+                    to={"/signup"}
                     className="singup-btn text-center rounded-lg py-1 px-5 transition-all bg-transparent border-2 border-primary cursor-pointer hover:bg-primary hover:text-black"
                   >
                     SignUp
-                  </a>
-                  <a
-                    href={"/login"}
+                  </Link>
+                  <Link
+                    to={"/login"}
                     className="singup-btn text-center rounded-lg py-1 px-5 transition-all bg-transparent border-2 border-primary cursor-pointer hover:bg-primary hover:text-black"
                   >
                     Login
-                  </a>
+                  </Link>
                 </>
               )}
             </div>
