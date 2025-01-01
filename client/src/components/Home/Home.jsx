@@ -7,9 +7,9 @@ const Home = () => {
   const isDarkTheme = useSelector((state) => state.theme.isDarkTheme);
   return (
     <>
-      <div class="h-[600px] py-20 px-8 flex">
+      <div class="h-[600px] max-lg:h-screen md:py-20 px-8 flex">
         <div class=" mx-auto text-center mt-20">
-          <h2 class=" md:text-6xl text-3xl font-extrabold relative after:absolute after:-bottom-5 after:h-1 after:w-1/2 after:bg-primary after:left-0 after:right-0 after:mx-auto after:rounded-full">
+          <h2 class=" md:text-6xl text-5xl font-extrabold relative after:absolute after:-bottom-5 after:h-1 after:w-1/2 after:bg-primary after:left-0 after:right-0 after:mx-auto after:rounded-full">
             Welcome to <span className="text-primary">RapiNet</span>!
           </h2>
           <div class="mt-12">
