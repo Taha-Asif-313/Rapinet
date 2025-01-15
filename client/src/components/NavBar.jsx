@@ -25,7 +25,7 @@ const Navbar = () => {
       <nav
         className={`${
           isLogin ? "hidden" : "flex"
-        } nav w-full z-20 justify-between items-center py-2 px-6 lg:px-10 bg-zinc-950 text-white`}
+        } nav w-full absolute z-20 justify-between items-center py-2 px-6 lg:px-10 bg-zinc-950 text-white`}
       >
         <div className="nav-start-section lg:w-[30%] w-[45%]">
           <div className="logo cursor-pointer">
