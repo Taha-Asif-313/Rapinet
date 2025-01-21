@@ -45,7 +45,7 @@ const Login = () => {
 
   return (
     <>
-      <div className=" md:flex-row-reverse mx-5 lg:mx-24 pt-24 h-screen gap-8">
+      <div className=" md:flex-row-reverse mx-5 lg:mx-24 md:pt-36 pt-24 h-screen gap-8">
         <form className="w-full lg:w-[33%] lg:border p-6 rounded-xl mx-auto">
           <div className="mb-4 ">
             <Link
