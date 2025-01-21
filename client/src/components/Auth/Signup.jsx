@@ -39,7 +39,7 @@ const Signup = () => {
 
   return (
     <>
-      <div className=" md:flex-row-reverse mx-5 lg:mx-24 mt-16 h-screen gap-8">
+      <div className=" md:flex-row-reverse mx-5 lg:mx-24 pt-16 h-screen gap-8">
         <form className="w-full lg:w-[33%] lg:border p-6 rounded-xl mx-auto">
           <div className="mb-4 text-center">
             <Link
